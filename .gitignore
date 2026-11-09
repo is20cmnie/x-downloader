@@ -1,0 +1,8 @@
+# 签名密钥和本地配置绝不进仓库
+*.keystore
+local.properties
+
+# 构建产物
+build/
+*.apk
+*.idsig
