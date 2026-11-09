@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playerRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- 视频只给 wrap_content 并居中：真实宽高由 PlayerActivity 在 onPrepared 里
+         按视频原始比例算好再 setLayoutParams。以前是双向 match_parent 把
+         VideoView 硬撑满整个区域，16:9 视频就被拉伸变形了。 -->
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <!-- 加载中转圈 -->
+    <ProgressBar
+        android:id="@+id/playerLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <!-- 顶部一行：返回 + 标题 -->
+    <LinearLayout
+        android:id="@+id/playerTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="16dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="10dp">
+
+        <Button
+            android:id="@+id/btnPlayerBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← 返回"
+            android:textSize="14sp"
+            android:textColor="@color/button_secondary_text"
+            android:backgroundTint="@color/button_secondary_bg" />
+
+        <TextView
+            android:id="@+id/txtPlayerTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="视频预览"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+</RelativeLayout>

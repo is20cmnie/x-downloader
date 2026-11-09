@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg">
+
+    <!-- 加载进度条：让用户看见页面在加载，而不是白屏干等 -->
+    <ProgressBar
+        android:id="@+id/progressLogin"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:max="100"
+        android:progressTint="@color/accent"
+        android:visibility="gone" />
+
+    <!-- 错误面板：主框架加载失败时显示原因和重试，别再静默白屏 -->
+    <LinearLayout
+        android:id="@+id/panelError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/button_secondary_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvErrorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/tvErrorDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="重试"
+            android:textColor="@color/button_text"
+            android:backgroundTint="@color/button_bg" />
+    </LinearLayout>
+
+    <!-- WebView 容器：登录流程弹出的新窗口（验证等）会以全屏子 WebView 叠在这里 -->
+    <FrameLayout
+        android:id="@+id/webContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <WebView
+            android:id="@+id/webLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="在上面的官方页面里登录完成、能看到自己的主页后，再点下面的按钮。"
+        android:textSize="13sp"
+        android:textColor="@color/text_secondary"
+        android:background="@color/app_bg" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:text="我已登录完成"
+        android:textColor="@color/button_text"
+        android:backgroundTint="@color/button_bg" />
+
+    <Button
+        android:id="@+id/btnAltEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="页面打不开？换个入口重试"
+        android:textColor="@color/button_secondary_text"
+        android:backgroundTint="@color/button_secondary_bg" />
+</LinearLayout>

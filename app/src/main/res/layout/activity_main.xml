@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="28dp">
+
+        <!-- 顶部一行：左上角设置入口 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚙ 设置"
+                android:textSize="14sp"
+                android:textColor="@color/button_secondary_text"
+                android:backgroundTint="@color/button_secondary_bg" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="推特下载器"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="复制一条推文链接进来，就能下载里面的图片和视频。"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/txtLoginStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="登录状态：未登录"
+            android:textSize="13sp"
+            android:textColor="@color/text_hint" />
+
+        <!-- 未登录时主页直接显示的登录区：登录成功后隐藏，入口回到设置页里 -->
+        <LinearLayout
+            android:id="@+id/layoutLoginPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btnLoginMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录推特账号"
+                android:textColor="@color/button_text"
+                android:backgroundTint="@color/button_bg" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="推文链接"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/editLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_bg"
+            android:padding="14dp"
+            android:minHeight="56dp"
+            android:hint="把推文链接粘贴到这里"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
+            android:inputType="textUri|textMultiLine"
+            android:maxLines="3"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnPaste"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="从剪贴板粘贴"
+                android:textColor="@color/button_secondary_text"
+                android:backgroundTint="@color/button_secondary_bg" />
+
+            <Button
+                android:id="@+id/btnParse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="解析这条推文"
+                android:textColor="@color/button_text"
+                android:backgroundTint="@color/button_bg" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text=""
+            android:textSize="15sp"
+            android:textColor="@color/text_primary" />
+
+        <!-- 解析成功后逐个列出的媒体：预览图 + 单独下载按钮，Java 里动态加行 -->
+        <LinearLayout
+            android:id="@+id/mediaList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/btnDownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="下载全部媒体"
+            android:textColor="@color/button_text"
+            android:backgroundTint="@color/button_bg"
+            android:visibility="gone" />
+
+        <!-- 下载进度条：服务在后台下载时由广播实时刷新，平时藏起来 -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/accent" />
+
+        <!-- 解析用的隐藏 WebView：用已登录的页面本身提取媒体，平时不可见 -->
+        <WebView
+            android:id="@+id/webParse"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0.02" />
+
+    </LinearLayout>
+</ScrollView>
