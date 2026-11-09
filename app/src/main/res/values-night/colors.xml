@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式（系统开深色时自动用这套）：深底 + 浅字，输入框文字清楚可见 -->
+    <color name="app_bg">#15202B</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#D6DEE3</color>
+    <color name="text_hint">#8899A6</color>
+    <color name="input_bg">#253341</color>
+    <color name="input_stroke">#5B7083</color>
+    <color name="button_bg">#1D9BF0</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="button_secondary_bg">#253341</color>
+    <color name="button_secondary_text">#FFFFFF</color>
+    <color name="accent">#1D9BF0</color>
+</resources>
